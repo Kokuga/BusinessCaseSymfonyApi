@@ -11,7 +11,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(
- *     attributes={"security"="is_granted('ROLE_PROFESSIONNEL', 'ROLE_ADMIN')"},
+ *     attributes={"security"="is_granted('ROLE_USER') and is_granted('ROLE_PROFESSIONNEL')"},
  *     normalizationContext={
  *          "groups"={"garage:get"}
  *     }

@@ -16,12 +16,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     attributes={"security"="is_granted('ROLE_ADMIN')"},
 
  *     itemOperations={
- *          "get"={"security"="is_granted('ROLE_PROFESSIONNEL')"},
- *          "put"={"security"="is_granted('ROLE_PROFESSIONNEL')"},
- *          "patch"={"security"="is_granted('ROLE_PROFESSIONNEL')"},
- *          "delete"={"security"="is_granted('ROLE_PROFESSIONNEL')"},
+ *          "get"={"security"="is_granted('ROLE_USER')"},
+ *          "put"={"security"="is_granted('ROLE_USER')"},
+ *          "patch"={"security"="is_granted('ROLE_USER')"},
+ *          "delete"={"security"="is_granted('ROLE_USER')"},
  *     },
- *      *     normalizationContext={
+ *     normalizationContext={
  *          "groups"={"professionnel:get"}
  *     }
  * )

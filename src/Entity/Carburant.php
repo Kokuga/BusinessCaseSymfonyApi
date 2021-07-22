@@ -7,18 +7,19 @@ use App\Repository\CarburantRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(
  *     collectionOperations={
  *          "get",
- *          "post"={"security"="is_granted('ROLE_PROFESSIONNEL', 'ROLE_ADMIN')"},
+ *          "post"={"security"="is_granted('ROLE_USER')  and is_granted('ROLE_PROFESSIONNEL')"},
  *     },
  *     itemOperations={
  *          "get",
- *          "put"={"security"="is_granted('ROLE_PROFESSIONNEL', 'ROLE_ADMIN')"},
- *          "patch"={"security"="is_granted('ROLE_PROFESSIONNEL', 'ROLE_ADMIN')"},
- *          "delete"={"security"="is_granted('ROLE_PROFESSIONNEL', 'ROLE_ADMIN')"},
+ *          "put"={"security"="is_granted('ROLE_USER')  and is_granted('ROLE_ADMIN')"},
+ *          "patch"={"security"="is_granted('ROLE_USER')  and is_granted('ROLE_PROFESSIONNEL')"},
+ *          "delete"={"security"="is_granted('ROLE_USER')  and is_granted('ROLE_PROFESSIONNEL')"},
  *     },
  * )
  * @ORM\Entity(repositoryClass=CarburantRepository::class)
@@ -34,6 +35,7 @@ class Carburant
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Groups({"annonce:get"})
      */
     private $libelle;
 
