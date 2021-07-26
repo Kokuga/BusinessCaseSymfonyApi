@@ -13,13 +13,13 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ApiResource(
  *     collectionOperations={
  *          "get",
- *          "post"={"security"="is_granted('ROLE_USER')  and is_granted('ROLE_PROFESSIONNEL')"},
+ *          "post"={"security"="is_granted('ROLE_USER'))"},
  *     },
  *     itemOperations={
  *          "get",
- *          "put"={"security"="is_granted('ROLE_USER')  and is_granted('ROLE_ADMIN')"},
- *          "patch"={"security"="is_granted('ROLE_USER')  and is_granted('ROLE_PROFESSIONNEL')"},
- *          "delete"={"security"="is_granted('ROLE_USER')  and is_granted('ROLE_PROFESSIONNEL')"},
+ *          "put"={"security"="is_granted('ROLE_USER')"},
+ *          "patch"={"security"="is_granted('ROLE_USER')"},
+ *          "delete"={"security"="is_granted('ROLE_USER')"},
  *     },
  * )
  * @ORM\Entity(repositoryClass=CarburantRepository::class)

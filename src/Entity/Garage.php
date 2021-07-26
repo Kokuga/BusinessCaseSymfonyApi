@@ -8,12 +8,20 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 /**
  * @ApiResource(
- *     attributes={"security"="is_granted('ROLE_USER') and is_granted('ROLE_PROFESSIONNEL')"},
+ *     attributes={"security"="is_granted('ROLE_USER')"},
+ *
+ *     itemOperations={
+ *          "get"={"security"="is_granted('ROLE_USER') or object.Professionnels == user"},
+ *          "put"={"security"="is_granted('ROLE_USER') or object.Professionnels == user"},
+ *          "patch"={"security"="is_granted('ROLE_USER') or object.Professionnels == user"},
+ *          "delete"={"security"="is_granted('ROLE_USER') or object.Professionnels == user"},
+ *     },
  *     normalizationContext={
- *          "groups"={"garage:get"}
+ *          "groups"={"garage:get"}, "enable_max_depth"=true
  *     }
  * )
  * @ORM\Entity(repositoryClass=GarageRepository::class)
@@ -55,6 +63,7 @@ class Garage
 
     /**
      * @ORM\OneToMany(targetEntity=Annonce::class, mappedBy="Garage")
+     * @Groups({"garage:get"})
      */
     private $annonces;
 
@@ -63,7 +72,7 @@ class Garage
      * @ORM\JoinColumn(nullable=false)
      *
      */
-    private $Professionnels;
+    public $Professionnels;
 
     public function __construct()
     {

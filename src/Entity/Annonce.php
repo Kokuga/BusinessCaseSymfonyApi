@@ -8,18 +8,19 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 /**
  * @ApiResource(
  *     collectionOperations={
  *          "get",
- *          "post"={"security"="is_granted('ROLE_USER')  and is_granted('ROLE_ADMIN')"},
+ *          "post"={"security"="is_granted('ROLE_USER')"},
  *     },
  *     itemOperations={
  *          "get",
- *          "put"={"security"="is_granted('ROLE_USER')  and is_granted('ROLE_ADMIN')"},
- *          "patch"={"security"="is_granted('ROLE_USER')  and is_granted('ROLE_ADMIN')"},
- *          "delete"={"security"="is_granted('ROLE_USER')  and is_granted('ROLE_ADMIN')"},
+ *          "put"={"security"="is_granted('ROLE_USER') or object.Garage.Professionnels == user"},
+ *          "patch"={"security"="is_granted('ROLE_USER') or object.Garage.Professionnels == user "},
+ *          "delete"={"security"="is_granted('ROLE_USER') or object.Garage.Professionnels == user "},
  *     },
  *     normalizationContext={
  *          "groups"={"annonce:get"}
@@ -39,70 +40,71 @@ class Annonce
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"annonce:get"})
+     * @Groups({"annonce:get", "garage:get"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"annonce:get"})
+     * @Groups({"annonce:get", "garage:get"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"annonce:get"})
+     * @Groups({"annonce:get", "garage:get"})
      */
     private $anneeCirculation;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"annonce:get"})
+     * @Groups({"annonce:get", "garage:get"})
      */
     private $kilometrage;
 
     /**
      * @ORM\Column(type="decimal", precision=9, scale=2)
-     * @Groups({"annonce:get"})
+     * @Groups({"annonce:get", "garage:get"})
      */
     private $price;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"annonce:get"})
+     * @Groups({"annonce:get", "garage:get"})
      */
     private $refAnnonce;
 
     /**
      * @ORM\Column(type="date")
-     * @Groups({"annonce:get"})
+     * @Groups({"annonce:get", "garage:get"})
      */
     private $dateAnnonce;
 
     /**
      * @ORM\ManyToOne(targetEntity=Garage::class, inversedBy="annonces")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"annonce:get"})
+     * @MaxDepth(1)
+     * @groups({"annonce:get", "garage:get"})
      */
-    private $Garage;
+    public $Garage;
 
     /**
      * @ORM\ManyToOne(targetEntity=Carburant::class, inversedBy="annonces")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"annonce:get"})
+     * @Groups({"annonce:get", "garage:get"})
      */
     private $Carburant;
 
     /**
      * @ORM\ManyToOne(targetEntity=Modele::class, inversedBy="annonces")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"annonce:get"})
+     * @Groups({"annonce:get", "garage:get"})
      */
     private $Modele;
 
     /**
      * @ORM\OneToMany(targetEntity=Photo::class, mappedBy="annonce")
-     * @Groups({"annonce:get"})
+     * @Groups({"annonce:get", "garage:get"})
      */
     private $photos;
 
