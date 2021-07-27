@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\AnnonceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -9,6 +10,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\RangeFilter;
 
 /**
  * @ApiResource(
@@ -18,15 +21,17 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
  *     },
  *     itemOperations={
  *          "get",
- *          "put"={"security"="is_granted('ROLE_USER') or object.Garage.Professionnels == user"},
- *          "patch"={"security"="is_granted('ROLE_USER') or object.Garage.Professionnels == user "},
- *          "delete"={"security"="is_granted('ROLE_USER') or object.Garage.Professionnels == user "},
+ *          "put"={"security"="is_granted('ROLE_USER') or object.Garage == user"},
+ *          "patch"={"security"="is_granted('ROLE_USER') or object.Garage == user "},
+ *          "delete"={"security"="is_granted('ROLE_USER') or object.Garage == user "},
  *     },
  *     normalizationContext={
  *          "groups"={"annonce:get"}
  *     }
  * )
  * @ORM\Entity(repositoryClass=AnnonceRepository::class)
+ * @ApiFilter(SearchFilter::class, properties={"title"="partial","Carburant.libelle"="partial", "Modele.name"="partial"} )
+ * @ApiFilter(RangeFilter::class, properties={"anneeCirculation", "kilometrage", "price"})
  */
 class Annonce
 {
