@@ -15,10 +15,10 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
  *     attributes={"security"="is_granted('ROLE_USER')"},
  *
  *     itemOperations={
- *          "get"={"security"="is_granted('ROLE_USER') or object.Professionnels == user"},
- *          "put"={"security"="is_granted('ROLE_USER') or object.Professionnels == user"},
- *          "patch"={"security"="is_granted('ROLE_USER') or object.Professionnels == user"},
- *          "delete"={"security"="is_granted('ROLE_USER') or object.Professionnels == user"},
+ *          "get"={"security"="is_granted('ROLE_ADMIN') or object.Professionnels == user"},
+ *          "put"={"security"="is_granted('ROLE_ADMIN') or object.Professionnels == user"},
+ *          "patch"={"security"="is_granted('ROLE_ADMIN') or object.Professionnels == user"},
+ *          "delete"={"security"="is_granted('ROLE_ADMIN') or object.Professionnels == user"},
  *     },
  *     normalizationContext={
  *          "groups"={"garage:get"}, "enable_max_depth"=true

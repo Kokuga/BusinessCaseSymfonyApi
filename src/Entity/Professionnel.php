@@ -10,16 +10,17 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
  *     attributes={"security"="is_granted('ROLE_ADMIN')"},
 
  *     itemOperations={
- *          "get"={"security"="is_granted('ROLE_USER')"},
- *          "put"={"security"="is_granted('ROLE_USER')"},
- *          "patch"={"security"="is_granted('ROLE_USER')"},
- *          "delete"={"security"="is_granted('ROLE_USER')"},
+ *          "get"={"security"="is_granted('ROLE_ADMIN') or object == user"},
+ *          "put"={"security"="is_granted('ROLE_ADMIN') or object == user"},
+ *          "patch"={"security"="is_granted('ROLE_ADMIN') or object == user"},
+ *          "delete"={"security"="is_granted('ROLE_ADMIN') or object == user"},
  *     },
  *     normalizationContext={
  *          "groups"={"professionnel:get"}
@@ -40,12 +41,14 @@ class Professionnel implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Groups({"professionnel:get"})
+     *  @Assert\NotBlank
      */
     private $username;
 
     /**
      * @ORM\Column(type="json")
      * @Groups({"professionnel:get"})
+     *  @Assert\NotBlank
      */
     private $roles = [];
 
@@ -53,30 +56,38 @@ class Professionnel implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      * @ORM\Column(type="string")
      * @Groups({"professionnel:get"})
+     *  @Assert\NotBlank
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=50)
      * @Groups({"professionnel:get"})
+     *  @Assert\NotBlank
      */
     private $first_name;
 
     /**
      * @ORM\Column(type="string", length=50)
      * @Groups({"professionnel:get"})
+     *  @Assert\NotBlank
      */
     private $last_name;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"professionnel:get"})
+     * @Assert\NotBlank
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email."
+     * )
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=10)
      * @Groups({"professionnel:get"})
+     *  @Assert\NotBlank
      */
     private $phone;
 

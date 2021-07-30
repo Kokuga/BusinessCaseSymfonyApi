@@ -12,6 +12,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\RangeFilter;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
@@ -21,9 +22,9 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\RangeFilter;
  *     },
  *     itemOperations={
  *          "get",
- *          "put"={"security"="is_granted('ROLE_USER') or object.Garage == user"},
- *          "patch"={"security"="is_granted('ROLE_USER') or object.Garage == user "},
- *          "delete"={"security"="is_granted('ROLE_USER') or object.Garage == user "},
+ *          "put"={"security"="is_granted('ROLE_ADMIN') or object.Garage == user"},
+ *          "patch"={"security"="is_granted('ROLE_ADMIN') or object.Garage == user "},
+ *          "delete"={"security"="is_granted('ROLE_ADMIN') or object.Garage == user "},
  *     },
  *     normalizationContext={
  *          "groups"={"annonce:get"}
@@ -43,33 +44,43 @@ class Annonce
      */
     private $id;
 
+
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"annonce:get", "garage:get"})
+     * @Assert\Length(
+     *     min = 2,
+     *     minMessage = "Your first name must be at least {{ limit }} characters long",
+     * )
+     * @Assert\NotBlank
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
      * @Groups({"annonce:get", "garage:get"})
+     *  @Assert\NotBlank
      */
     private $description;
 
     /**
      * @ORM\Column(type="integer")
      * @Groups({"annonce:get", "garage:get"})
+     *  @Assert\NotBlank
      */
     private $anneeCirculation;
 
     /**
      * @ORM\Column(type="integer")
      * @Groups({"annonce:get", "garage:get"})
+     *  @Assert\NotBlank
      */
     private $kilometrage;
 
     /**
      * @ORM\Column(type="decimal", precision=9, scale=2)
      * @Groups({"annonce:get", "garage:get"})
+     *  @Assert\NotBlank
      */
     private $price;
 
@@ -82,6 +93,7 @@ class Annonce
     /**
      * @ORM\Column(type="date")
      * @Groups({"annonce:get", "garage:get"})
+     *  @Assert\NotBlank
      */
     private $dateAnnonce;
 
@@ -97,6 +109,7 @@ class Annonce
      * @ORM\ManyToOne(targetEntity=Carburant::class, inversedBy="annonces")
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"annonce:get", "garage:get"})
+     *  @Assert\NotBlank
      */
     private $Carburant;
 
@@ -104,12 +117,14 @@ class Annonce
      * @ORM\ManyToOne(targetEntity=Modele::class, inversedBy="annonces")
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"annonce:get", "garage:get"})
+     *  @Assert\NotBlank
      */
     private $Modele;
 
     /**
      * @ORM\OneToMany(targetEntity=Photo::class, mappedBy="annonce")
      * @Groups({"annonce:get", "garage:get"})
+     *  @Assert\NotBlank
      */
     private $photos;
 

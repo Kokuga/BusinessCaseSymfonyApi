@@ -14,10 +14,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
             "post"={"security"="is_granted('ROLE_USER')"}
  *     },
  *     itemOperations={
- *          "get"={"security"="is_granted('ROLE_USER')"},
- *          "put"={"security"="is_granted('ROLE_USER')"},
- *          "patch"={"security"="is_granted('ROLE_USER')"},
- *          "delete"={"security"="is_granted('ROLE_USER')"},
+ *          "get"={"security"="is_granted('ROLE_ADMIN') or object.Professionnels == user"},
+ *          "put"={"security"="is_granted('ROLE_ADMIN') or object.Professionnels == user"},
+ *          "patch"={"security"="is_granted('ROLE_ADMIN') or object.Professionnels == user"},
+ *          "delete"={"security"="is_granted('ROLE_ADMIN') or object.Professionnels == user"},
  *     },
  * )
  * @ORM\Entity(repositoryClass=AddressRepository::class)

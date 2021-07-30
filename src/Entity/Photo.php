@@ -12,10 +12,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     attributes={"security"="is_granted('ROLE_USER')"},
  *
  *    itemOperations={
- *          "get"={"security"="is_granted('ROLE_USER') or object.annonce.Garage.Professionnels == user"},
- *          "put"={"security"="is_granted('ROLE_USER') or object.annonce.Garage.Professionnels == user"},
- *          "patch"={"security"="is_granted('ROLE_USER') or object.annonce.Garage.Professionnels == user"},
- *          "delete"={"security"="is_granted('ROLE_USER') or object.annonce.Garage.Professionnels == user"},
+ *          "get"={"security"="is_granted('ROLE_ADMIN') or object.annonce.Garage.Professionnels == user"},
+ *          "put"={"security"="is_granted('ROLE_ADMIN') or object.annonce.Garage.Professionnels == user"},
+ *          "patch"={"security"="is_granted('ROLE_ADMIN') or object.annonce.Garage.Professionnels == user"},
+ *          "delete"={"security"="is_granted('ROLE_ADMIN') or object.annonce.Garage.Professionnels == user"},
  *     },
  * )
  * @ORM\Entity(repositoryClass=PhotoRepository::class)

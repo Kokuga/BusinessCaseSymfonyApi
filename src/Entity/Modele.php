@@ -11,7 +11,16 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(
- *     attributes={"security"="is_granted('ROLE_USER')"},
+ *     collectionOperations={
+ *          "get",
+ *          "post"={"security"="is_granted('ROLE_USER'))"},
+ *     },
+ *     itemOperations={
+ *          "get",
+ *          "put"={"security"="is_granted('ROLE_ADMIN')"},
+ *          "patch"={"security"="is_granted('ROLE_ADMIN')"},
+ *          "delete"={"security"="is_granted('ROLE_ADMIN')"},
+ *     },
  *     normalizationContext={
  *          "groups"={"annonce:get"}
  *     }
