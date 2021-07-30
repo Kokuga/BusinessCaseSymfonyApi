@@ -13,5 +13,4 @@ api_platform:
         pagination:
             page_parameter_name: _page
     defaults:
-        pagination_default_per_page: 20
-
+        pagination_items_per_page: 20

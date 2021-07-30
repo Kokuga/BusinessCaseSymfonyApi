@@ -9,7 +9,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(
- *     attributes={"security"="is_granted('ROLE_USER')"},
+ *     collectionOperations={
+            "get"={"security"="is_granted('ROLE_ADMIN') or object.annonce.Garage.Professionnels == user"},
+ *          "post"={"security"="is_granted('ROLE_USER')"}
+ *     },
  *
  *    itemOperations={
  *          "get"={"security"="is_granted('ROLE_ADMIN') or object.annonce.Garage.Professionnels == user"},

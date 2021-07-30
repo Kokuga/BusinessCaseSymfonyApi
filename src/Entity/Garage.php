@@ -23,11 +23,11 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *          "delete"={"security"="is_granted('ROLE_ADMIN') or object.Professionnels == user"},
  *     },
  *     normalizationContext={
- *          "groups"={"garage:get"}, "enable_max_depth"=true
+ *          "groups"={"garage:get"},
  *     }
- *     @ApiFilter(SearchFilter::class, properties={"name"="partial", "siret"="exact"})
  * )
  * @ORM\Entity(repositoryClass=GarageRepository::class)
+ *     @ApiFilter(SearchFilter::class, properties={"name"="partial", "siret"="exact"})
  */
 class Garage
 {
