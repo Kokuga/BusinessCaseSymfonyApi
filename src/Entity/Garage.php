@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\GarageRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -9,6 +10,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * @ApiResource(
@@ -23,6 +25,7 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
  *     normalizationContext={
  *          "groups"={"garage:get"}, "enable_max_depth"=true
  *     }
+ *     @ApiFilter(SearchFilter::class, properties={"name"="partial", "siret"="exact"})
  * )
  * @ORM\Entity(repositoryClass=GarageRepository::class)
  */
