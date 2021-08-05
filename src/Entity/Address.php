@@ -61,6 +61,7 @@ class Address
      *      max = 6,
      *      minMessage = "Your codePostal must be at least {{ limit }} characters long",
      *      maxMessage = "Your codePostal cannot be longer than {{ limit }} characters"
+     * )
      */
     private $codePostal;
 
@@ -72,6 +73,7 @@ class Address
      *      max = 50,
      *      minMessage = "Your ville must be at least {{ limit }} characters long",
      *      maxMessage = "Your ville cannot be longer than {{ limit }} characters"
+     * )
      */
     private $ville;
 

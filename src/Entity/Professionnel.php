@@ -110,8 +110,8 @@ class Professionnel implements UserInterface, PasswordAuthenticatedUserInterface
      * @Assert\Length(
      *     min = 10,
      *     max = 10,
-     *     minMessage="limit 10 characters"
-     *     maxMessage="limit 10 characters0,"
+     *     minMessage="limit 10 characters",
+     *     maxMessage="limit 10 characters"
      * )
      */
     private $phone;

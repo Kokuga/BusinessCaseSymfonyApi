@@ -49,6 +49,7 @@ class Garage
      *      max = 50,
      *      minMessage = "Your first name must be at least {{ limit }} characters long",
      *      maxMessage = "Your first name cannot be longer than {{ limit }} characters"
+     * )
      */
     private $name;
 
@@ -61,6 +62,7 @@ class Garage
      *      max = 10,
      *      minMessage = "Your phone must be at least {{ limit }} characters long",
      *      maxMessage = "Your phone cannot be longer than {{ limit }} characters"
+     * )
      */
     private $phone;
 
@@ -73,6 +75,7 @@ class Garage
      *      max = 14,
      *      minMessage = "Your SIRET must be at least {{ limit }} characters long",
      *      maxMessage = "Your SIRET cannot be longer than {{ limit }} characters"
+     * )
      */
     private $siret;
 
