@@ -45,6 +45,10 @@ class Professionnel implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=180, unique=true)
      * @Groups({"professionnel:get"})
      *  @Assert\NotBlank
+     * @Assert\Length(
+     *     min = 2,
+     *     minMessage="At least 2 characters"
+     * )
      */
     private $username;
 
@@ -60,6 +64,10 @@ class Professionnel implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string")
      * @Groups({"professionnel:get"})
      *  @Assert\NotBlank
+     * @Assert\Length(
+     *     min = 2,
+     *     minMessage="At least 2 characters"
+     * )
      */
     private $password;
 
@@ -67,6 +75,10 @@ class Professionnel implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=50)
      * @Groups({"professionnel:get"})
      *  @Assert\NotBlank
+     * @Assert\Length(
+     *     min = 2,
+     *     minMessage="At least 2 characters"
+     * )
      */
     private $first_name;
 
@@ -74,6 +86,10 @@ class Professionnel implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=50)
      * @Groups({"professionnel:get"})
      *  @Assert\NotBlank
+     * @Assert\Length(
+     *     min = 2,
+     *     minMessage="At least 2 characters"
+     * )
      */
     private $last_name;
 
@@ -91,6 +107,12 @@ class Professionnel implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=10)
      * @Groups({"professionnel:get"})
      *  @Assert\NotBlank
+     * @Assert\Length(
+     *     min = 10,
+     *     max = 10,
+     *     minMessage="limit 10 characters"
+     *     maxMessage="limit 10 characters0,"
+     * )
      */
     private $phone;
 

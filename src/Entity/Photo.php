@@ -6,6 +6,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\PhotoRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
@@ -35,12 +36,20 @@ class Photo
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"annonce:get"})
+     * @Assert\Length(
+     *     min = 2,
+     *     minMessage="At least 2 characters"
+     * )
      */
     private $path;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"annonce:get"})
+     * @Assert\Length(
+     *     min = 2,
+     *     minMessage="At least 2 characters"
+     * )
      */
     private $name;
 

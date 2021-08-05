@@ -92,8 +92,8 @@ class Annonce
 
     /**
      * @ORM\Column(type="date")
-     * @Groups({"annonce:get", "garage:get"})
-     *  @Assert\NotBlank
+     * @Groups({"annonce:get", "garage:get"},
+     * @Assert\DateTime
      */
     private $dateAnnonce;
 

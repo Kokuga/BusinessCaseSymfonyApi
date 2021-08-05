@@ -6,6 +6,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\AddressRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
@@ -35,6 +36,8 @@ class Address
     /**
      * @ORM\Column(type="string", length=50)
      * @Groups({"garage:get"})
+     * @Assert\NotBlank
+     * @Assert\Length(min = 2, minMessage = "Your first ligne1 must be at least {{ limit }} characters long")
      */
     private $ligne1;
 
@@ -53,12 +56,22 @@ class Address
     /**
      * @ORM\Column(type="string", length=6)
      * @Groups({"garage:get"})
+     * @Assert\Length(
+     *      min = 5,
+     *      max = 6,
+     *      minMessage = "Your codePostal must be at least {{ limit }} characters long",
+     *      maxMessage = "Your codePostal cannot be longer than {{ limit }} characters"
      */
     private $codePostal;
 
     /**
      * @ORM\Column(type="string", length=50)
      * @Groups({"garage:get"})
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 50,
+     *      minMessage = "Your ville must be at least {{ limit }} characters long",
+     *      maxMessage = "Your ville cannot be longer than {{ limit }} characters"
      */
     private $ville;
 

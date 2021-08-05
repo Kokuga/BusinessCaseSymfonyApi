@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
@@ -42,18 +43,36 @@ class Garage
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"garage:get"})
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 50,
+     *      minMessage = "Your first name must be at least {{ limit }} characters long",
+     *      maxMessage = "Your first name cannot be longer than {{ limit }} characters"
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=10)
      * @Groups({"garage:get", "professionnel:get", "annonce:get"})
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 10,
+     *      max = 10,
+     *      minMessage = "Your phone must be at least {{ limit }} characters long",
+     *      maxMessage = "Your phone cannot be longer than {{ limit }} characters"
      */
     private $phone;
 
     /**
      * @ORM\Column(type="string", length=14)
      * @Groups({"garage:get", "professionnel:get", "annonce:get"})
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 14,
+     *      max = 14,
+     *      minMessage = "Your SIRET must be at least {{ limit }} characters long",
+     *      maxMessage = "Your SIRET cannot be longer than {{ limit }} characters"
      */
     private $siret;
 
@@ -61,6 +80,7 @@ class Garage
      * @ORM\OneToOne(targetEntity=Address::class, inversedBy="garage", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"garage:get", "professionnel:get", "annonce:get"})
+     * @Assert\NotBlank
      */
     private $address;
 
