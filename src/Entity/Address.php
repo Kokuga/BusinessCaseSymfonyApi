@@ -35,7 +35,7 @@ class Address
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"garage:get"})
+     * @Groups({"garage:get", "professionnel:get"})
      * @Assert\NotBlank
      * @Assert\Length(min = 2, minMessage = "Your first ligne1 must be at least {{ limit }} characters long")
      */
@@ -43,19 +43,19 @@ class Address
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
-     * @Groups({"garage:get"})
+     * @Groups({"garage:get", "professionnel:get"})
      */
     private $ligne2;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
-     * @Groups({"garage:get"})
+     * @Groups({"garage:get", "professionnel:get"})
      */
     private $ligne3;
 
     /**
      * @ORM\Column(type="string", length=6)
-     * @Groups({"garage:get"})
+     * @Groups({"garage:get", "professionnel:get"})
      * @Assert\Length(
      *      min = 5,
      *      max = 6,
@@ -67,7 +67,7 @@ class Address
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"garage:get"})
+     * @Groups({"garage:get", "professionnel:get"})
      * @Assert\Length(
      *      min = 2,
      *      max = 50,
