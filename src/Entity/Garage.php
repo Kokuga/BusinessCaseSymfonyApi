@@ -42,7 +42,7 @@ class Garage
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"garage:get"})
+     * @Groups({"garage:get", "professionnel:get"})
      * @Assert\NotBlank
      * @Assert\Length(
      *      min = 2,
