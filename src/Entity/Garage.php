@@ -36,7 +36,7 @@ class Garage
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"garage:get"})
+     * @Groups({"garage:get", "professionnel:get"})
      */
     private $id;
 
