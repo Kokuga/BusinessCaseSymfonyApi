@@ -27,7 +27,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *          "delete"={"security"="is_granted('ROLE_ADMIN') or object.Garage == user "},
  *     },
  *     normalizationContext={
- *          "groups"={"annonce:get"}
+ *          "groups"={"annonce:get"},
+ *          "enable_max_depth" = true
  *     }
  * )
  * @ORM\Entity(repositoryClass=AnnonceRepository::class)

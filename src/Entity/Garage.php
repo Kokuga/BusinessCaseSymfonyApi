@@ -25,6 +25,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     },
  *     normalizationContext={
  *          "groups"={"garage:get"},
+ *     "enable_max_depth" = true
  *     }
  * )
  * @ORM\Entity(repositoryClass=GarageRepository::class)

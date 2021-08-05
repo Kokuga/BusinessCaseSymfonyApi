@@ -25,7 +25,8 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *          "delete"={"security"="is_granted('ROLE_ADMIN') or object == user"},
  *     },
  *     normalizationContext={
- *          "groups"={"professionnel:get"}
+ *          "groups"={"professionnel:get"},
+ *          "enable_max_depth" = true
  *     }
  * )
  * @ORM\Entity(repositoryClass=ProfessionnelRepository::class)
