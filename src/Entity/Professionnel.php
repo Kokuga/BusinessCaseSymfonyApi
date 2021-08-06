@@ -118,8 +118,7 @@ class Professionnel implements UserInterface, PasswordAuthenticatedUserInterface
     private $phone;
 
     /**
-     * @ORM\OneToMany(targetEntity=Garage::class, mappedBy="Professionnels")
-     * @Groups({"professionnel:get"})
+     * @ORM\OneToMany(targetEntity=Garage::class, mappedBy="professionnel")
      */
     private $garages;
 
@@ -127,6 +126,8 @@ class Professionnel implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->garages = new ArrayCollection();
     }
+
+
 
     public function getId(): ?int
     {
@@ -272,7 +273,7 @@ class Professionnel implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->garages->contains($garage)) {
             $this->garages[] = $garage;
-            $garage->setProfessionnels($this);
+            $garage->setProfessionnel($this);
         }
 
         return $this;
@@ -282,11 +283,12 @@ class Professionnel implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->garages->removeElement($garage)) {
             // set the owning side to null (unless already changed)
-            if ($garage->getProfessionnels() === $this) {
-                $garage->setProfessionnels(null);
+            if ($garage->getProfessionnel() === $this) {
+                $garage->setProfessionnel(null);
             }
         }
 
         return $this;
     }
+
 }
