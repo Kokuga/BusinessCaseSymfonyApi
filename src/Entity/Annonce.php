@@ -40,7 +40,7 @@ class Annonce
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
-     * @Groups({"annonce:get"})
+     * @Groups({"annonce:get", "garage:get", "professionnel:get"})
      * @ORM\Column(type="integer")
      */
     private $id;
