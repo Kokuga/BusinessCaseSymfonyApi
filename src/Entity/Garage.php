@@ -25,7 +25,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     },
  *     normalizationContext={
  *          "groups"={"garage:get"},
- *     "enable_max_depth" = true
+ *          "enable_max_depth" = true
  *     }
  * )
  * @ORM\Entity(repositoryClass=GarageRepository::class)
@@ -88,6 +88,7 @@ class Garage
 
     /**
      * @ORM\ManyToOne(targetEntity=Professionnel::class, inversedBy="garages")
+     * @Groups({"garage:get", "professionnel:get", "annonce:get"})
      */
     private $Professionnel;
 

@@ -11,6 +11,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
@@ -38,13 +39,13 @@ class Professionnel implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"professionnel:get"})
+     * @Groups({"professionnel:get", "garage:get"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups({"professionnel:get"})
+     * @Groups({"professionnel:get", "garage:get"})
      *  @Assert\NotBlank
      * @Assert\Length(
      *     min = 2,
@@ -55,7 +56,7 @@ class Professionnel implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="json")
-     * @Groups({"professionnel:get"})
+     * @Groups({"professionnel:get", "garage:get"})
      *  @Assert\NotBlank
      */
     private $roles = [];
@@ -63,7 +64,7 @@ class Professionnel implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
-     * @Groups({"professionnel:get"})
+     * @Groups({"professionnel:get", "garage:get"})
      *  @Assert\NotBlank
      * @Assert\Length(
      *     min = 2,
@@ -74,7 +75,7 @@ class Professionnel implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"professionnel:get"})
+     * @Groups({"professionnel:get", "garage:get"})
      *  @Assert\NotBlank
      * @Assert\Length(
      *     min = 2,
@@ -85,7 +86,7 @@ class Professionnel implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"professionnel:get"})
+     * @Groups({"professionnel:get", "garage:get"})
      *  @Assert\NotBlank
      * @Assert\Length(
      *     min = 2,
@@ -96,7 +97,7 @@ class Professionnel implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"professionnel:get"})
+     * @Groups({"professionnel:get", "garage:get"})
      * @Assert\NotBlank
      * @Assert\Email(
      *     message = "The email '{{ value }}' is not a valid email."
@@ -106,7 +107,7 @@ class Professionnel implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=10)
-     * @Groups({"professionnel:get"})
+     * @Groups({"professionnel:get", "garage:get"})
      *  @Assert\NotBlank
      * @Assert\Length(
      *     min = 10,
@@ -119,6 +120,7 @@ class Professionnel implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\OneToMany(targetEntity=Garage::class, mappedBy="Professionnel")
+     * @MaxDepth(1)
      * @Groups({"professionnel:get", "annonce:get"})
      */
     private $garages;
