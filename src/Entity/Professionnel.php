@@ -119,6 +119,7 @@ class Professionnel implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\OneToMany(targetEntity=Garage::class, mappedBy="Professionnel")
+     * @Groups({"professionnel:get", "annonce:get"})
      */
     private $garages;
 

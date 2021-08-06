@@ -81,14 +81,6 @@ class Garage
     private $siret;
 
     /**
-     * @ORM\OneToOne(targetEntity=Address::class, inversedBy="garage", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     * @Groups({"garage:get", "professionnel:get", "annonce:get"})
-     * @Assert\NotBlank
-     */
-    private $address;
-
-    /**
      * @ORM\OneToMany(targetEntity=Annonce::class, mappedBy="Garage")
      * @Groups({"garage:get", "professionnel:get"})
      */
@@ -98,6 +90,36 @@ class Garage
      * @ORM\ManyToOne(targetEntity=Professionnel::class, inversedBy="garages")
      */
     private $Professionnel;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Groups({"garage:get", "professionnel:get", "annonce:get"})
+     */
+    private $ligne1;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"garage:get", "professionnel:get", "annonce:get"})
+     */
+    private $ligne2;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"garage:get", "professionnel:get", "annonce:get"})
+     */
+    private $ligne3;
+
+    /**
+     * @ORM\Column(type="string", length=6)
+     * @Groups({"garage:get", "professionnel:get", "annonce:get"})
+     */
+    private $codePostal;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Groups({"garage:get", "professionnel:get", "annonce:get"})
+     */
+    private $ville;
 
 
     public function __construct()
@@ -147,17 +169,6 @@ class Garage
         return $this;
     }
 
-    public function getAddress(): ?Address
-    {
-        return $this->address;
-    }
-
-    public function setAddress(Address $address): self
-    {
-        $this->address = $address;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Annonce[]
@@ -197,6 +208,66 @@ class Garage
     public function setProfessionnel(?Professionnel $Professionnel): self
     {
         $this->Professionnel = $Professionnel;
+
+        return $this;
+    }
+
+    public function getLigne1(): ?string
+    {
+        return $this->ligne1;
+    }
+
+    public function setLigne1(string $ligne1): self
+    {
+        $this->ligne1 = $ligne1;
+
+        return $this;
+    }
+
+    public function getLigne2(): ?string
+    {
+        return $this->ligne2;
+    }
+
+    public function setLigne2(?string $ligne2): self
+    {
+        $this->ligne2 = $ligne2;
+
+        return $this;
+    }
+
+    public function getLigne3(): ?string
+    {
+        return $this->ligne3;
+    }
+
+    public function setLigne3(?string $ligne3): self
+    {
+        $this->ligne3 = $ligne3;
+
+        return $this;
+    }
+
+    public function getCodePostal(): ?string
+    {
+        return $this->codePostal;
+    }
+
+    public function setCodePostal(string $codePostal): self
+    {
+        $this->codePostal = $codePostal;
+
+        return $this;
+    }
+
+    public function getVille(): ?string
+    {
+        return $this->ville;
+    }
+
+    public function setVille(string $ville): self
+    {
+        $this->ville = $ville;
 
         return $this;
     }
