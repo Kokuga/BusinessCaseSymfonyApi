@@ -118,7 +118,7 @@ class Professionnel implements UserInterface, PasswordAuthenticatedUserInterface
     private $phone;
 
     /**
-     * @ORM\OneToMany(targetEntity=Garage::class, mappedBy="professionnel")
+     * @ORM\OneToMany(targetEntity=Garage::class, mappedBy="Professionnel")
      */
     private $garages;
 
@@ -290,5 +290,7 @@ class Professionnel implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+
 
 }

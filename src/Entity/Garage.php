@@ -97,7 +97,8 @@ class Garage
     /**
      * @ORM\ManyToOne(targetEntity=Professionnel::class, inversedBy="garages")
      */
-    private $professionnel;
+    private $Professionnel;
+
 
     public function __construct()
     {
@@ -190,14 +191,15 @@ class Garage
 
     public function getProfessionnel(): ?Professionnel
     {
-        return $this->professionnel;
+        return $this->Professionnel;
     }
 
-    public function setProfessionnel(?Professionnel $professionnel): self
+    public function setProfessionnel(?Professionnel $Professionnel): self
     {
-        $this->professionnel = $professionnel;
+        $this->Professionnel = $Professionnel;
 
         return $this;
     }
+
     
 }
