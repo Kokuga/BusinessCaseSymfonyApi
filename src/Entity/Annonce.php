@@ -100,7 +100,6 @@ class Annonce
 
     /**
      * @ORM\ManyToOne(targetEntity=Garage::class, inversedBy="annonces")
-     * @ORM\JoinColumn(nullable=false)
      * @MaxDepth(1)
      * @groups({"annonce:get", "garage:get"})
      */
