@@ -18,10 +18,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     attributes={"security"="is_granted('ROLE_USER')"},
  *
  *     itemOperations={
- *          "get"={"security"="is_granted('ROLE_ADMIN') or object.Professionnels == user"},
- *          "put"={"security"="is_granted('ROLE_ADMIN') or object.Professionnels == user"},
- *          "patch"={"security"="is_granted('ROLE_ADMIN') or object.Professionnels == user"},
- *          "delete"={"security"="is_granted('ROLE_ADMIN') or object.Professionnels == user"},
+ *          "get"={"security"="is_granted('ROLE_ADMIN') or object.Professionnel == user"},
+ *          "put"={"security"="is_granted('ROLE_ADMIN') or object.Professionnel == user"},
+ *          "patch"={"security"="is_granted('ROLE_ADMIN') or object.Professionnel == user"},
+ *          "delete"={"security"="is_granted('ROLE_ADMIN') or object.Professionnel == user"},
  *     },
  *     normalizationContext={
  *          "groups"={"garage:get"},
@@ -88,9 +88,9 @@ class Garage
 
     /**
      * @ORM\ManyToOne(targetEntity=Professionnel::class, inversedBy="garages")
-     * @Groups({"garage:get", "professionnel:get", "annonce:get"})
+     * @Groups({"garage:get"})
      */
-    private $Professionnel;
+    public $Professionnel;
 
     /**
      * @ORM\Column(type="string", length=255)

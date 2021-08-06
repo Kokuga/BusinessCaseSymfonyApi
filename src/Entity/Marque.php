@@ -22,6 +22,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  *          "patch"={"security"="is_granted('ROLE_ADMIN')"},
  *          "delete"={"security"="is_granted('ROLE_ADMIN')"},
  *     },
+ *     normalizationContext={
+ *          "groups"={"marque:get"}
+ *     }
+ *
  * )
  * @ORM\Entity(repositoryClass=MarqueRepository::class)
  */
@@ -31,13 +35,13 @@ class Marque
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"annonce:get"})
+     * @Groups({"annonce:get", "marque:get"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"annonce:get"})
+     * @Groups({"annonce:get", "marque:get"})
      * @Assert\Length(
      *     min = 2,
      *     minMessage = "Your first name must be at least {{ limit }} characters long",
@@ -48,6 +52,7 @@ class Marque
 
     /**
      * @ORM\OneToMany(targetEntity=Modele::class, mappedBy="marque")
+     * @Groups({"marque:get"})
      */
     private $modeles;
 

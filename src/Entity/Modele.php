@@ -34,12 +34,13 @@ class Modele
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"marque:get"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"annonce:get"})
+     * @Groups({"annonce:get", "marque:get"})
      * @Assert\Length(
      *     min = 2,
      *     minMessage = "Your first name must be at least {{ limit }} characters long",
