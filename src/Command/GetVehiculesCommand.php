@@ -42,15 +42,16 @@
 
         protected function configure(): void
         {
-
+            $this->addArgument('limit', InputArgument::REQUIRED);
         }
 
         protected function execute(InputInterface $input, OutputInterface $output): int
         {
+            $limit = $input->getArgument('limit');
             $countMarque = 0;
             $countModele = 0;
 
-            $response = $this->client->request('GET', 'https://parseapi.back4app.com/classes/Car_Model_List?limit=500&keys=Make,Model', [
+            $response = $this->client->request('GET', 'https://parseapi.back4app.com/classes/Car_Model_List?limit='.$limit.'&keys=Make,Model', [
                 'headers' => [
                     'X-Parse-Application-Id: hlhoNKjOvEhqzcVAJ1lxjicJLZNVv36GdbboZj3Z',
                     'X-Parse-Master-Key: SNMJJF0CZZhTPhLDIqGhTlUNV9r60M2Z5spyWfXW'
