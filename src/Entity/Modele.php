@@ -34,7 +34,7 @@ class Modele
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"marque:get"})
+     * @Groups({"marque:get", "annonce:get"})
      */
     private $id;
 
