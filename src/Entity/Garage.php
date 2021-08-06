@@ -90,7 +90,7 @@ class Garage
 
     /**
      * @ORM\OneToMany(targetEntity=Annonce::class, mappedBy="Garage")
-     * @Groups({"garage:get"})
+     * @Groups({"garage:get", "professionnel:get"})
      */
     private $annonces;
 

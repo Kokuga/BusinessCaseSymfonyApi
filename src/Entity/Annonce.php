@@ -48,7 +48,7 @@ class Annonce
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"annonce:get", "garage:get"})
+     * @Groups({"annonce:get", "garage:get", "professionnel:get"})
      * @Assert\Length(
      *     min = 2,
      *     minMessage = "Your first name must be at least {{ limit }} characters long",
@@ -59,41 +59,41 @@ class Annonce
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"annonce:get", "garage:get"})
+     * @Groups({"annonce:get", "garage:get", "professionnel:get"})
      *  @Assert\NotBlank
      */
     private $description;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"annonce:get", "garage:get"})
+     * @Groups({"annonce:get", "garage:get", "professionnel:get"})
      *  @Assert\NotBlank
      */
     private $anneeCirculation;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"annonce:get", "garage:get"})
+     * @Groups({"annonce:get", "garage:get", "professionnel:get"})
      *  @Assert\NotBlank
      */
     private $kilometrage;
 
     /**
      * @ORM\Column(type="decimal", precision=9, scale=2)
-     * @Groups({"annonce:get", "garage:get"})
+     * @Groups({"annonce:get", "garage:get", "professionnel:get"})
      *  @Assert\NotBlank
      */
     private $price;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"annonce:get", "garage:get"})
+     * @Groups({"annonce:get", "garage:get", "professionnel:get"})
      */
     private $refAnnonce;
 
     /**
      * @ORM\Column(type="date")
-     * @Groups({"annonce:get", "garage:get"}),
+     * @Groups({"annonce:get", "garage:get", "professionnel:get"}),
      * @Assert\DateTime()
      */
     private $dateAnnonce;
