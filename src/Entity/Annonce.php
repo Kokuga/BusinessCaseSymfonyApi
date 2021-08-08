@@ -94,7 +94,7 @@ class Annonce
     /**
      * @ORM\Column(type="date")
      * @Groups({"annonce:get", "garage:get", "professionnel:get"}),
-     * @Assert\DateTime()
+     * @Assert\Date()
      */
     private $dateAnnonce;
 
@@ -123,7 +123,7 @@ class Annonce
     private $Modele;
 
     /**
-     * @ORM\OneToMany(targetEntity=Photo::class, mappedBy="annonce")
+     * @ORM\OneToMany(targetEntity=Photo::class, mappedBy="annonce", cascade={"remove"})
      * @Groups({"annonce:get", "garage:get"})
      *  @Assert\NotBlank
      */

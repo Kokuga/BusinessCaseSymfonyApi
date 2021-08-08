@@ -7,6 +7,8 @@
     use App\Repository\CarburantRepository;
     use App\Repository\GarageRepository;
     use App\Repository\ModeleRepository;
+    use Cassandra\Date;
+    use DateTime;
     use Doctrine\ORM\EntityManagerInterface;
     use Monolog\DateTimeImmutable;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -50,13 +52,15 @@
             $garage = $this->garageRepository->findOneBy(['id' => $post_data['garageId']]);
             $carburant = $this->carburantRepository->findOneBy(['id' => $post_data['carburantForm']]);
             $modele = $this->modeleRepository->findOneBy(['id' => $post_data['modeleForm']]);
+            $date = new DateTime('now');
+            $date->format('d-m-Y');
 
             $annonce->setDescription($post_data['description']);
             $annonce->setAnneeCirculation($post_data['dateCar']);
             $annonce->setKilometrage($post_data['kilometrage']);
             $annonce->setTitle($post_data['title']);
             $annonce->setPrice($post_data['price']);
-            $annonce->setDateAnnonce(new DateTimeImmutable('now'));
+            $annonce->setDateAnnonce($date);
             $annonce->setCarburant($carburant);
             $annonce->setGarage($garage);
             $annonce->setModele($modele);
@@ -72,7 +76,7 @@
         }
 
         /**
-         * @Route("/annonce/edit", name="annonce")
+         * @Route("/annonce/edit", name="annonceedit")
          */
         public function edit(Request $request): Response
         {

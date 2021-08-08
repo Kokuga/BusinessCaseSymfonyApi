@@ -122,7 +122,7 @@ class Professionnel implements UserInterface, PasswordAuthenticatedUserInterface
     private $phone;
 
     /**
-     * @ORM\OneToMany(targetEntity=Garage::class, mappedBy="Professionnel")
+     * @ORM\OneToMany(targetEntity=Garage::class, mappedBy="Professionnel", cascade={"remove"})
      * @MaxDepth(1)
      * @Groups({"professionnel:get", "annonce:get"})
      */

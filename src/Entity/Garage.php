@@ -81,13 +81,13 @@ class Garage
     private $siret;
 
     /**
-     * @ORM\OneToMany(targetEntity=Annonce::class, mappedBy="Garage")
+     * @ORM\OneToMany(targetEntity=Annonce::class, mappedBy="Garage", cascade={"remove"})
      * @Groups({"garage:get", "professionnel:get"})
      */
     private $annonces;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Professionnel::class, inversedBy="garages")
+     * @ORM\ManyToOne(targetEntity=Professionnel::class, inversedBy="garages", cascade={"remove"})
      * @Groups({"garage:get"})
      */
     public $Professionnel;
