@@ -32,7 +32,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     }
  * )
  * @ORM\Entity(repositoryClass=AnnonceRepository::class)
- * @ApiFilter(SearchFilter::class, properties={"title"="partial","Carburant.id"="partial", "Modele.id"="partial", "Modele.marque.id"="partial"} )
+ * @ApiFilter(SearchFilter::class, properties={"title"="partial","Carburant.id"="partial", "Modele.id"="partial", "Modele.marque.id"="partial", "refAnnonce"="partial"} )
  * @ApiFilter(RangeFilter::class, properties={"anneeCirculation", "kilometrage", "price"})
  */
 class Annonce
