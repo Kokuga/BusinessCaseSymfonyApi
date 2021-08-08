@@ -17,7 +17,10 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * @ApiResource(
- *     attributes={"security"="is_granted('ROLE_ADMIN')"},
+ *     collectionOperations={
+ *          "get"={"security"="is_granted('ROLE_USER')"},
+ *          "post"={"security"="is_granted('ROLE_ADMIN')"},
+ *     },
 
  *     itemOperations={
  *          "get"={"security"="is_granted('ROLE_ADMIN') or object == user"},

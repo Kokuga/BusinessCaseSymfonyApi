@@ -29,6 +29,7 @@ class Carburant
 {
     /**
      * @ORM\Id
+     * @Groups({"annonce:get"})
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
