@@ -87,7 +87,7 @@ class Garage
     private $annonces;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Professionnel::class, inversedBy="garages", cascade={"remove"})
+     * @ORM\ManyToOne(targetEntity=Professionnel::class, inversedBy="garages")
      * @Groups({"garage:get"})
      */
     public $Professionnel;
