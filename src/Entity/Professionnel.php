@@ -34,7 +34,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *     }
  * )
  * @ORM\Entity(repositoryClass=ProfessionnelRepository::class)
- * @ApiFilter(SearchFilter::class, properties={"username":"partial", "email":"partial", "phone":"partial"})
+ * @ApiFilter(SearchFilter::class, properties={"username":"partial", "email":"partial", "phone":"partial", "first_name"="partial", "last_name"="partial"})
  */
 class Professionnel implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -42,7 +42,7 @@ class Professionnel implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"professionnel:get", "garage:get"})
+     * @Groups({"professionnel:get", "garage:get", "annonce:get"})
      */
     private $id;
 

@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
- *     attributes={"security"="is_granted('ROLE_USER')"},
+ *     attributes={"security"="is_granted('ROLE_USER')", "pagination_maximum_items_per_page"=5},
  *
  *     itemOperations={
  *          "get"={"security"="is_granted('ROLE_ADMIN') or object.Professionnel == user"},
@@ -27,6 +27,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *          "groups"={"garage:get"},
  *          "enable_max_depth" = true
  *     }
+ *
  * )
  * @ORM\Entity(repositoryClass=GarageRepository::class)
  *     @ApiFilter(SearchFilter::class, properties={"name"="partial", "siret"="exact"})
@@ -88,7 +89,7 @@ class Garage
 
     /**
      * @ORM\ManyToOne(targetEntity=Professionnel::class, inversedBy="garages")
-     * @Groups({"garage:get"})
+     * @Groups({"garage:get", "annonce:get"})
      */
     public $Professionnel;
 

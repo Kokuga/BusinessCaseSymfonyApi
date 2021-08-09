@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ApiResource(
  *     collectionOperations={
- *          "get",
+ *          "get"={"paginationMaximumItemsPerPage"=5},
  *          "post"={"security"="is_granted('ROLE_USER')"},
  *     },
  *     itemOperations={
@@ -30,6 +30,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *          "groups"={"annonce:get"},
  *          "enable_max_depth" = true
  *     }
+ *
  * )
  * @ORM\Entity(repositoryClass=AnnonceRepository::class)
  * @ApiFilter(SearchFilter::class, properties={"title"="partial","Carburant.id"="partial", "Modele.id"="partial", "Modele.marque.id"="partial", "refAnnonce"="partial"} )
