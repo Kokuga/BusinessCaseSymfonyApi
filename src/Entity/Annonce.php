@@ -125,7 +125,7 @@ class Annonce
 
     /**
      * @ORM\OneToMany(targetEntity=Photo::class, mappedBy="annonce", cascade={"remove"})
-     * @Groups({"annonce:get", "garage:get"})
+     * @Groups({"annonce:get", "garage:get", "professionnel:get"})
      *  @Assert\NotBlank
      */
     private $photos;

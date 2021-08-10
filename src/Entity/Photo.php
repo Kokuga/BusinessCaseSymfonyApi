@@ -13,6 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     collectionOperations={
             "get"={"security"="is_granted('ROLE_ADMIN') or object.annonce.Garage.Professionnels == user"},
  *          "post"={"security"="is_granted('ROLE_USER')"}
+ *
  *     },
  *
  *    itemOperations={
@@ -35,7 +36,7 @@ class Photo
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"annonce:get"})
+     * @Groups({"annonce:get", "garage:get", "professionnel:get"})
      * @Assert\Length(
      *     min = 2,
      *     minMessage="At least 2 characters"
@@ -45,7 +46,7 @@ class Photo
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"annonce:get"})
+     * @Groups({"annonce:get", "garage:get", "professionnel:get"})
      * @Assert\Length(
      *     min = 2,
      *     minMessage="At least 2 characters"
