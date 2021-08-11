@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ApiResource(
  *     collectionOperations={
- *          "get"={"paginationMaximumItemsPerPage"=5},
+ *          "get"={"pagination_items_per_page"=5},
  *          "post"={"security"="is_granted('ROLE_USER')"},
  *     },
  *     itemOperations={
