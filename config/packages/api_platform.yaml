@@ -19,10 +19,10 @@ api_platform:
             etag: true
 
             # Default value for the response max age.
-            max_age: 7200
+            max_age: 10800
 
             # Default value for the response shared (proxy) max age.
-            shared_max_age: 7200
+            shared_max_age: 10800
 
             # Default values of the "Vary" HTTP header.
             vary: [ 'Accept' ]

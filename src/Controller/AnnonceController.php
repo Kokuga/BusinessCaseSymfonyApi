@@ -8,14 +8,17 @@
     use App\Repository\CarburantRepository;
     use App\Repository\GarageRepository;
     use App\Repository\ModeleRepository;
+    use App\Repository\PhotoRepository;
     use Cassandra\Date;
     use DateTime;
     use Doctrine\ORM\EntityManagerInterface;
     use Monolog\DateTimeImmutable;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+    use Symfony\Component\HttpFoundation\BinaryFileResponse;
     use Symfony\Component\HttpFoundation\JsonResponse;
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\Response;
+    use Symfony\Component\HttpFoundation\ResponseHeaderBag;
     use Symfony\Component\Routing\Annotation\Route;
     use Symfony\Component\Serializer\Normalizer\DataUriNormalizer;
 
@@ -26,6 +29,7 @@
         private ModeleRepository $modeleRepository;
         private EntityManagerInterface $em;
         private AnnonceRepository $annonceRepository;
+        private PhotoRepository $photoRepository;
 
         /**
          * @param GarageRepository $garageRepository
@@ -33,14 +37,16 @@
          * @param ModeleRepository $modeleRepository
          * @param EntityManagerInterface $em
          * @param AnnonceRepository $annonceRepository
+         * @param PhotoRepository $photoRepository
          */
-        public function __construct(GarageRepository $garageRepository, CarburantRepository $carburantRepository, ModeleRepository $modeleRepository, EntityManagerInterface $em, AnnonceRepository $annonceRepository)
+        public function __construct(GarageRepository $garageRepository, CarburantRepository $carburantRepository, ModeleRepository $modeleRepository, EntityManagerInterface $em, AnnonceRepository $annonceRepository, PhotoRepository $photoRepository)
         {
             $this->garageRepository = $garageRepository;
             $this->carburantRepository = $carburantRepository;
             $this->modeleRepository = $modeleRepository;
             $this->em = $em;
             $this->annonceRepository = $annonceRepository;
+            $this->photoRepository = $photoRepository;
         }
 
 
@@ -88,16 +94,18 @@
                     $image_part_aux = explode('image/', $image_part[0]);
                     $image_type = $image_part_aux[1];
                     $image_en_base64 = base64_decode($image_part[1]);
-                    $file = "../../CAC-client/assets/images/" . uniqid() . '.' . $image_type;
+                    $file = "../public/images/" . uniqid() . '.' . $image_type;
                     if($image_type == 'svg+xml') {
                         $response = new Response();
-                        $response->setStatusCode(500, 'You can put more than 5 images');
+                        $response->setStatusCode(500, 'SVG are not allowed');
                         return $response;
                     }
                     file_put_contents($file, $image_en_base64);
+                    $fileName = substr($file, 17);
+                    $filePath = str_replace('../', '', $file);
 
-                    $photo->setName($post_data['title'] . $key);
-                    $photo->setPath($file);
+                    $photo->setName($fileName);
+                    $photo->setPath($filePath);
                     $photo->setAnnonce($annonce);
 
                     $this->em->persist($photo);
@@ -150,5 +158,32 @@
             return $randomString;
         }
 
+        /**
+         * @Route("/public/images/{imageName}", name="getImage")
+         */
+        public function getImageFromUrl($imageName):response
+        {
+            $image = $this->photoRepository->findOneBy(['name' => $imageName]);
+            if($image != null) {
+                $file = file_get_contents('../'.$image->getPath());
+                $response = new response();
+                $disposition = $response->headers->makeDisposition(ResponseHeaderBag::DISPOSITION_INLINE, $image->getName());
+                $response->headers->set('Content-Disposition', $disposition);
+                $imageExploded = explode('.', $image->getName());
+                if($imageExploded[1] == 'jpeg') {
+                    $response->headers->set('Content-Type', 'image/jpeg');
+                } else if ($imageExploded[1] == 'png')
+                {
+                    $response->headers->set('Content-Type', 'image/png');
+                }
+                $response->setContent($file);
+                return $response;
+            } else {
+                $response = new Response();
+                $response->setStatusCode(500, 'Pas de bonne image');
+                return $response;
+            }
+
+        }
 
     }
