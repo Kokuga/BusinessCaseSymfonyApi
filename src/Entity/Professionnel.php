@@ -23,7 +23,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *     },
 
  *     itemOperations={
- *          "get",
+ *          "get"={"security"="is_granted('ROLE_ADMIN') or object == user"},
  *          "put"={"security"="is_granted('ROLE_ADMIN') or object == user"},
  *          "patch"={"security"="is_granted('ROLE_ADMIN') or object == user"},
  *          "delete"={"security"="is_granted('ROLE_ADMIN') or object == user"},
