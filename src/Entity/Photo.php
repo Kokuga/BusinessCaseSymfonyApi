@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ApiResource(
  *     collectionOperations={
-            "get"={"security"="is_granted('ROLE_ADMIN') or object.annonce.Garage.Professionnels == user"},
+            "get",
  *          "post"={"security"="is_granted('ROLE_USER')"}
  *
  *     },
