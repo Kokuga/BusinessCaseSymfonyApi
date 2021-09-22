@@ -105,7 +105,7 @@
                     $filePath = str_replace('../', '', $file);
 
                     $photo->setName($fileName);
-                    $photo->setPath($filePath);
+                    $photo->setPath('/' . $filePath);
                     $photo->setAnnonce($annonce);
 
                     $this->em->persist($photo);
